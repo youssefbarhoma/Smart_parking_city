@@ -1,6 +1,8 @@
-package com.example.city;
+package com.example.city.Controller;
 
 import com.example.city.Model.ParkingSpot;
+import com.example.city.Service.ParkingSpotService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,12 @@ public class ParkingSpotController {
     @PostMapping
     public ParkingSpot createSpot(@RequestBody ParkingSpot spot) {
         return ParkingSpotS.createSpot(spot);
+    }
+
+    @PostMapping("/generate")
+    public ResponseEntity<String> generateSpots(@RequestBody GenerateSpotsRequest request) {
+        ParkingSpotS.generateSpots(request);
+        return ResponseEntity.ok("Parking spots generated successfully.");
     }
 
     @GetMapping("/spots")

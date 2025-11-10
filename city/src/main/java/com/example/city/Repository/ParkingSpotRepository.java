@@ -1,4 +1,4 @@
-package com.example.city;
+package com.example.city.Repository;
 
 import com.example.city.Model.ParkingSpot;
 import org.springframework.data.jpa.repository.JpaRepository;

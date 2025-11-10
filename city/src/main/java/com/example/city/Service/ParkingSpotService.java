@@ -1,5 +1,6 @@
 package com.example.city.Service;
 
+import com.example.city.GenerateSpotsRequest;
 import com.example.city.Model.ParkingSpot;
 import com.example.city.Repository.ParkingSpotRepository;
 import org.springframework.stereotype.Service;
@@ -30,9 +31,9 @@ public class ParkingSpotService {
                 ParkingSpot spot = new ParkingSpot();
                 spot.setSection(sectionConfig.getSectionName());
                 spot.setSpotNumber(i);
-                spot.setAvailable(true);
+                spot.setOccupied(true);
 
-                parkingSpotRepository.save(spot);
+                parkingSpotR.save(spot);
             }
         });
     }

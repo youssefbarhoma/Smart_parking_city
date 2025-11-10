@@ -1,5 +1,7 @@
 package com.example.city;
 
+import com.example.city.Model.Section;
+
 import java.util.List;
 
 public class GenerateSpotsRequest {
@@ -10,7 +12,7 @@ public class GenerateSpotsRequest {
         private String sectionName;
         private int spotCount;
 
-        public String getSectionName() {
+        public Section getSectionName() {
             return sectionName;
         }
 

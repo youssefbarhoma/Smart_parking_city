@@ -12,7 +12,7 @@ public class ParkingSpot {
     private long id;
 
     @Column(name = "spotNumber")
-    private String spotNumber;
+    private int spotNumber;
 
     @Column(name = "occupied")
     private boolean occupied;
@@ -30,7 +30,7 @@ public class ParkingSpot {
         return occupied;
     }
 
-    public String getSpotNumber() {
+    public int getSpotNumber() {
         return spotNumber;
     }
 
@@ -38,7 +38,7 @@ public class ParkingSpot {
         return section;
     }
 
-    public void setSpotNumber(String spotNumber) {
+    public void setSpotNumber(int spotNumber) {
         this.spotNumber = spotNumber;
     }
 

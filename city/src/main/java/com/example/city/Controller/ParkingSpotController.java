@@ -1,5 +1,6 @@
 package com.example.city.Controller;
 
+import com.example.city.GenerateSpotsRequest;
 import com.example.city.Model.ParkingSpot;
 import com.example.city.Service.ParkingSpotService;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,13 @@ public class ParkingSpotController {
         return ParkingSpotS.createSpot(spot);
     }
 
-    @PostMapping("/generate")
-    public ResponseEntity<String> generateSpots(@RequestBody GenerateSpotsRequest request) {
-        ParkingSpotS.generateSpots(request);
-        return ResponseEntity.ok("Parking spots generated successfully.");
+    @PostMapping("/{floorNum}/sections/generate-spots")
+    public ResponseEntity<String> generateSpots(
+            @PathVariable int floorNum,
+            @RequestBody GenerateSpotsRequest request
+    ) {
+        ParkingSpotS.generateSpots(floorNum, request);
+        return ResponseEntity.ok("Parking spots generated successfully for Floor " + floorNum);
     }
 
     @GetMapping("/spots")

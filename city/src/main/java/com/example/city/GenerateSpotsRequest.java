@@ -1,23 +1,21 @@
 package com.example.city;
 
-import com.example.city.Model.Section;
-
 import java.util.List;
 
 public class GenerateSpotsRequest {
 
-    private List<SectionConfig> sections;
+    private List<SectionRequest> sections;
 
-    public static class SectionConfig {
-        private String sectionName;
+    public static class SectionRequest {
+        private String label;
         private int spotCount;
 
-        public Section getSectionName() {
-            return sectionName;
+        public String getLabel() {
+            return label;
         }
 
-        public void setSectionName(String sectionName) {
-            this.sectionName = sectionName;
+        public void setLabel(String label) {
+            this.label = label;
         }
 
         public int getSpotCount() {
@@ -29,11 +27,11 @@ public class GenerateSpotsRequest {
         }
     }
 
-    public List<SectionConfig> getSections() {
+    public List<SectionRequest> getSections() {
         return sections;
     }
 
-    public void setSections(List<SectionConfig> sections) {
+    public void setSections(List<SectionRequest> sections) {
         this.sections = sections;
     }
 }

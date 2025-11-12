@@ -1,8 +1,14 @@
 package com.example.city.Service;
 
 import com.example.city.GenerateSpotsRequest;
+import com.example.city.Model.Floor;
 import com.example.city.Model.ParkingSpot;
+import com.example.city.Model.Section;
+import com.example.city.Repository.FloorRepository;
 import com.example.city.Repository.ParkingSpotRepository;
+import com.example.city.Repository.SectionRepository;
+import com.example.city.Service.Strategy.SpotGenerationStrategy;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +17,17 @@ import java.util.List;
 public class ParkingSpotService {
 
     private final ParkingSpotRepository parkingSpotR;
-    
-    public ParkingSpotService(ParkingSpotRepository parkingSpotR){
+    private final FloorRepository floorRepository;
+    private final SectionService sectionService;
+    private final SpotGenerationStrategy spotGenerationStrategy;
+
+    public ParkingSpotService(ParkingSpotRepository parkingSpotR, FloorRepository floorRepository,
+                              SectionService sectionService,
+                              SpotGenerationStrategy spotGenerationStrategy) {
         this.parkingSpotR = parkingSpotR;
+        this.floorRepository = floorRepository;
+        this.sectionService = sectionService;
+        this.spotGenerationStrategy = spotGenerationStrategy;
     }
 
     public ParkingSpot createSpot(ParkingSpot spot){
@@ -24,17 +38,21 @@ public class ParkingSpotService {
         return parkingSpotR.findAll();
     }
 
-    public void generateSpots(GenerateSpotsRequest request) {
-        request.getSections().forEach(sectionConfig -> {
+    @Transactional
+    public void generateSpots(int floorNum, GenerateSpotsRequest request) {
 
-            for (int i = 1; i <= sectionConfig.getSpotCount(); i++) {
-                ParkingSpot spot = new ParkingSpot();
-                spot.setSection(sectionConfig.getSectionName());
-                spot.setSpotNumber(i);
-                spot.setOccupied(true);
+        //Find the floor
+        Floor floor = floorRepository.findByLevelNumber(floorNum)
+                .orElseThrow(() -> new RuntimeException("Floor not found"));
 
-                parkingSpotR.save(spot);
-            }
-        });
+        //Loop through sections
+        for (GenerateSpotsRequest.SectionRequest sectionReq : request.getSections()) {
+
+            //Get or create section
+            Section section = sectionService.getOrCreateSection(floor, sectionReq.getLabel());
+
+            //Delegate spot generation to strategy
+            spotGenerationStrategy.generateSpots(floor, section, sectionReq.getSpotCount());
+        }
     }
 }

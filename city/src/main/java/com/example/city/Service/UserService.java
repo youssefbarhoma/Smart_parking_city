@@ -1,41 +1,37 @@
 package com.example.city.Service;
 
+import com.example.city.Controller.UserRegistrationDTO;
+import com.example.city.Model.User;
+import com.example.city.Model.Role; // <--- Changed to your Role enum
 import com.example.city.Repository.UserRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-/*@Service
+@Service
+@RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public UserResponse registerUser(RegisterUserRequest request) {
-
-        // rule: unique email
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists!");
+    @Transactional
+    public User registerUser(UserRegistrationDTO registrationDTO) {
+        if (userRepository.existsByEmail(registrationDTO.getEmail())) {
+            throw new RuntimeException("Email already exists");
         }
 
-        // Factory creates the object
-        User user = UserFactory.createUser(request);
+        User user = new User();
+        user.setName(registrationDTO.getName());
+        user.setEmail(registrationDTO.getEmail());
+        user.setPassword(registrationDTO.getPassword());
+        user.setRole(Role.CUSTOMER);
+        user.setBalance(0);
 
-        // Save it
-        User saved = userRepository.save(user);
-
-        // Convert to DTO
-        return convertToResponse(saved);
+        return userRepository.save(user);
     }
 
-    private UserResponse convertToResponse(User saved) {
-        UserResponse response = new UserResponse();
-        response.setId(saved.getId());
-        response.setUsername(saved.getUsername());
-        response.setEmail(saved.getEmail());
-        response.setRole(saved.getRole());
-        return response;
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
-*/

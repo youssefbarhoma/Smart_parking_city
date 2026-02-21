@@ -42,7 +42,7 @@ public class ParkingSpotService {
     public void generateSpots(int floorNum, GenerateSpotsRequest request) {
 
         //Find the floor
-        Floor floor = floorRepository.findByLevelNumber(floorNum)
+        Floor floor = floorRepository.findByLevelNum(floorNum)
                 .orElseThrow(() -> new RuntimeException("Floor not found"));
 
         //Loop through sections

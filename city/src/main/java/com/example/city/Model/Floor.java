@@ -19,7 +19,7 @@ public class Floor {
 
     @ManyToOne
     @JoinColumn(name = "parking_lot_id")
-    private ParkingLot PL;
+    private ParkingLot parkingLot;
 
     @OneToMany(mappedBy = "floor", cascade = CascadeType.ALL)
     private List<Section> sections;
@@ -36,12 +36,12 @@ public class Floor {
         return sections;
     }
 
-    public ParkingLot getPL() {
-        return PL;
+    public ParkingLot getparkingLot() {
+        return parkingLot;
     }
 
     public void setPL(ParkingLot PL) {
-        this.PL = PL;
+        this.parkingLot = PL;
     }
 
     public void setLevelNum(int levelNum) {

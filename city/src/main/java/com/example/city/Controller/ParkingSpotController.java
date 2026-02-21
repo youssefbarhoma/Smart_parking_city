@@ -31,7 +31,7 @@ public class ParkingSpotController {
         return ResponseEntity.ok("Parking spots generated successfully for Floor " + floorNum);
     }
 
-    @GetMapping("/spots")
+    @GetMapping
     public List<ParkingSpot> getAllSpots() {
         return ParkingSpotS.getAllSpots();
     }

@@ -1,25 +1,29 @@
-/*package com.example.city.Controller;
+package com.example.city.Controller;
 
+import com.example.city.Model.User;
 import com.example.city.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestBody RegisterUserRequest request) {
-        UserResponse response = userService.registerUser(request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<User> register(@RequestBody UserRegistrationDTO userDto) {
+        User createdUser = userService.registerUser(userDto);
+        return ResponseEntity.ok(createdUser);
     }
-}*/
+
+    @GetMapping("/{email}")
+    public ResponseEntity<User> getUserProfile(@PathVariable String email) {
+        // In the future, we will get email from the SecurityContext (JWT Token)
+        User user = userService.getUserByEmail(email);
+        return ResponseEntity.ok(user);
+    }
+}

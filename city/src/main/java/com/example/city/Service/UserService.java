@@ -5,14 +5,16 @@ import com.example.city.Model.User;
 import com.example.city.Model.Role; // <--- Changed to your Role enum
 import com.example.city.Repository.UserRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public User registerUser(UserRegistrationDTO registrationDTO) {

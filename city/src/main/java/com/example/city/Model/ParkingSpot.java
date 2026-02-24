@@ -1,5 +1,6 @@
 package com.example.city.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 //A7 , B12 , ...
 @Entity
@@ -19,6 +20,7 @@ public class ParkingSpot {
 
     @ManyToOne
     @JoinColumn(name = "section_id")
+    @JsonIgnore
     private Section section;
 
 

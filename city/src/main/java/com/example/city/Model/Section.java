@@ -1,6 +1,7 @@
 package com.example.city.Model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ public class Section {
 
     @ManyToOne
     @JoinColumn(name = "floor_id")
+    @JsonIgnore
     private Floor floor;
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ParkingSpot> spots;
 
     public long getId() {

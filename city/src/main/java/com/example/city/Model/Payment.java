@@ -34,4 +34,60 @@ public class Payment {
 
     @CreationTimestamp
     private LocalDateTime timestamp;
+
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public String getTransactionReference() {
+        return transactionReference;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public PaymentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PaymentStatus status) {
+        this.status = status;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setTransactionReference(String transactionReference) {
+        this.transactionReference = transactionReference;
+    }
 }

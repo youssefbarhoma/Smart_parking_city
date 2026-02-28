@@ -5,15 +5,18 @@ import com.example.city.Model.User;
 import com.example.city.Model.Role; // <--- Changed to your Role enum
 import com.example.city.Repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) { // <--- UPDATE CONSTRUCTOR
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -25,7 +28,7 @@ public class UserService {
         User user = new User();
         user.setName(registrationDTO.getName());
         user.setEmail(registrationDTO.getEmail());
-        user.setPassword(registrationDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
         user.setRole(Role.CUSTOMER);
         user.setBalance(0);
 

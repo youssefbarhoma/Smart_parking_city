@@ -1,6 +1,6 @@
 package com.example.city.Service;
 
-import com.example.city.Controller.UserRegistrationDTO;
+import com.example.city.Controller.DTO.UserRegistrationDTO;
 import com.example.city.Model.User;
 import com.example.city.Model.Role; // <--- Changed to your Role enum
 import com.example.city.Repository.UserRepository;
@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) { // <--- UPDATE CONSTRUCTOR
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

@@ -1,4 +1,4 @@
-package com.example.city.Controller;
+package com.example.city.Controller.DTO;
 
 public class BookingRequestDTO {
     private String email;

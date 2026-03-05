@@ -1,6 +1,6 @@
 package com.example.city.Service;
 
-import com.example.city.Controller.BookingRequestDTO;
+import com.example.city.Controller.DTO.BookingRequestDTO;
 import com.example.city.Model.*;
 import com.example.city.Repository.BookingRepository;
 import com.example.city.Repository.ParkingSpotRepository;

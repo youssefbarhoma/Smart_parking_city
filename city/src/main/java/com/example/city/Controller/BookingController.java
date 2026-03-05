@@ -1,5 +1,6 @@
 package com.example.city.Controller;
 
+import com.example.city.Controller.DTO.BookingRequestDTO;
 import com.example.city.Model.Booking;
 import com.example.city.Model.Payment;
 import com.example.city.Service.BookingService;

@@ -1,6 +1,4 @@
-package com.example.city.Controller;
-
-import lombok.Data;
+package com.example.city.Controller.DTO;
 
 public class UserRegistrationDTO {
     private String name;
